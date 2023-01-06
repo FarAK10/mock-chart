@@ -1,0 +1,43 @@
+<table>
+    <!-- <tr>
+        <td>
+            <ngx-charts-bar-vertical
+             [results]="productSales"
+             [legendTitle]="legendTitle"
+             [view]="view"
+             [xAxis]="xAxis"
+             [yAxis]="yAxis"
+             [legend]="legend"
+             [showDataLabel]="showataLabel"
+             [xAxisLabel]="'fff'"
+             [yAxisLabel]="legendTitleMulti"
+             (activate)="onActivate()"
+
+             >
+            </ngx-charts-bar-vertical>
+        </td>
+    </tr> -->
+
+    <tr>
+        <!-- <td>
+          <ngx-charts-bar-horizontal-stacked [results]="productsSalesMulti"></ngx-charts-bar-horizontal-stacked>
+        </td> -->
+        <td>
+            <ngx-charts-line-chart
+            [legendTitle]="legendTitle"
+             [results]="productsSalesMulti"
+             [view]="view"
+             [xAxis]="xAxis"
+             [yAxis]="yAxis"
+             [legend]="legend"
+             [showXAxisLabel]="true"
+             [showYAxisLabel]="true"
+             [showRefLabels]="true"
+             [xAxisLabel]="'Date'"
+             [yAxisLabel]="'Problems'"
+
+             >
+            </ngx-charts-line-chart>
+        </td>
+    </tr>
+</table>
