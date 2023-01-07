@@ -25,15 +25,19 @@ export function createMultipleLinesGraph(dataByMonthes:Array<IMonthData>,problem
 
 
 export function createTwoLinesGraph(dataByMonthes:Array<IMonthData>):Array<IGraph>{
-  const graph:Array<IGraph> = [createGraphComponent('warnings'),createGraphComponent('problems')];
+  const warningsGraph = createGraphComponent('warnings');
+  const problemsGraph = createGraphComponent('problems');
+
+  const graphs:Array<IGraph> = [warningsGraph,problemsGraph];
+
   dataByMonthes.forEach((monthlyData:IMonthData)=>{
     const newWarningCoordinate = createNewCoordinate(monthlyData,'warnings');
     const newProblemsCoordinate = createNewCoordinate(monthlyData,'problems');
-    graph[0].series.push(newWarningCoordinate);
-    graph[1].series.push(newProblemsCoordinate);
+    warningsGraph.series.push(newWarningCoordinate);
+    problemsGraph.series.push(newProblemsCoordinate);
   })
-  return graph
 
+  return graphs
 }
 
 
