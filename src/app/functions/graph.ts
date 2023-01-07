@@ -13,11 +13,12 @@ export function createMultipleLinesGraph(dataByMonthes:Array<IMonthData>,problem
     const productName = monthlyData.product as string;
     const grahpIndex= getGraphIndex(productGraphs,productName);
     if(grahpIndex!=-1){
-      productGraphs[grahpIndex].series.push(graphCoordinate);
+      const productGraph = productGraphs[grahpIndex]
+      productGraph.series.push(graphCoordinate);
     } else{
-      const newGraphComponet = createGraphComponent(productName);
-      newGraphComponet.series.push(graphCoordinate);
-      productGraphs.push(newGraphComponet);
+      const newGraph = createEmptyGraph(productName);
+      newGraph.series.push(graphCoordinate);
+      productGraphs.push(newGraph);
     }
   })
   return productGraphs;
@@ -25,8 +26,8 @@ export function createMultipleLinesGraph(dataByMonthes:Array<IMonthData>,problem
 
 
 export function createTwoLinesGraph(dataByMonthes:Array<IMonthData>):Array<IGraph>{
-  const warningsGraph = createGraphComponent('warnings');
-  const problemsGraph = createGraphComponent('problems');
+  const warningsGraph = createEmptyGraph('warnings');
+  const problemsGraph = createEmptyGraph('problems');
 
   const graphs:Array<IGraph> = [warningsGraph,problemsGraph];
 
@@ -57,7 +58,8 @@ function createNewCoordinate(monthlyData:IMonthData,value:problemsOrWarnings):IG
   }
 }
 
-function createGraphComponent(componentName:string):IGraph{
+function createEmptyGraph
+(componentName:string):IGraph{
    return {
     name:componentName,
     series:[],
