@@ -16,6 +16,7 @@ interface IGraphCoordinate {
 }
 
 type problemsOrWarnings = 'problems'|'warnings'
+type graphType = 'multi-line'|'two-line'|'vertical-bar'
 
-export {IMonthData,IProductGraph,IGraphCoordinate,problemsOrWarnings}
+export {IMonthData,IProductGraph,IGraphCoordinate,problemsOrWarnings,graphType}
 

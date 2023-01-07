@@ -1,6 +1,10 @@
-import { IGraphCoordinate,IMonthData,IProductGraph,problemsOrWarnings } from "../mock-data/interfaces";
+import { IGraphCoordinate,IMonthData,IProductGraph,problemsOrWarnings,graphType} from "../mock-data/interfaces";
 
-export function createGraphs(dataByMonthes:Array<IMonthData>,problemOrWarning:problemsOrWarnings):Array<IProductGraph>{
+
+
+
+
+export function createMultipleLinesGraph(dataByMonthes:Array<IMonthData>,problemOrWarning:problemsOrWarnings):Array<IProductGraph>{
   let productGraphs:Array<IProductGraph> = [];
 
   dataByMonthes.forEach(monthlyData=>{
@@ -23,6 +27,14 @@ export function createGraphs(dataByMonthes:Array<IMonthData>,problemOrWarning:pr
   return productGraphs;
 }
 
+
+export function createTwoLinesGraph(dataByMonthes:Array<IMonthData>):Array<IProductGraph>{
+  let produc
+    return []
+}
+
+
+
 function createNewCoordinate(monthlyData:IMonthData,value:problemsOrWarnings):IGraphCoordinate{
   if(value=='problems'){
     return {
@@ -36,4 +48,3 @@ function createNewCoordinate(monthlyData:IMonthData,value:problemsOrWarnings):IG
     }
   }
 }
-
