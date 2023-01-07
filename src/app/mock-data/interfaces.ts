@@ -5,7 +5,7 @@ interface IMonthData {
   product?:string;
 }
 
-interface IProductGraph {
+interface IGraph {
   name:string;
   series:Array<IGraphCoordinate>;
 }
@@ -18,5 +18,5 @@ interface IGraphCoordinate {
 type problemsOrWarnings = 'problems'|'warnings'
 type graphType = 'multi-line'|'two-line'|'vertical-bar'
 
-export {IMonthData,IProductGraph,IGraphCoordinate,problemsOrWarnings,graphType}
+export {IMonthData,IGraph,IGraphCoordinate,problemsOrWarnings,graphType}
 

@@ -1,37 +1,41 @@
-import { IGraphCoordinate,IMonthData,IProductGraph,problemsOrWarnings,graphType} from "../mock-data/interfaces";
+import { monthlyDatas } from "../mock-data/data";
+import { IGraphCoordinate,IMonthData,IGraph,problemsOrWarnings,graphType} from "../mock-data/interfaces";
 
 
 
 
 
-export function createMultipleLinesGraph(dataByMonthes:Array<IMonthData>,problemOrWarning:problemsOrWarnings):Array<IProductGraph>{
-  let productGraphs:Array<IProductGraph> = [];
+export function createMultipleLinesGraph(dataByMonthes:Array<IMonthData>,problemOrWarning:problemsOrWarnings):Array<IGraph>{
+  let productGraphs:Array<IGraph> = [];
 
   dataByMonthes.forEach(monthlyData=>{
     const graphCoordinate = createNewCoordinate(monthlyData,problemOrWarning);
-    let isFound = false
-    productGraphs.forEach(product=>{
-      if(product.name===monthlyData.product){
-        isFound=true
-        product.series.push(graphCoordinate);
-      }
-    })
-    if(!isFound){
-      const productGraphInfo:IProductGraph= {
-        name:monthlyData.product as string,
-        series:[graphCoordinate]
-      }
-      productGraphs.push(productGraphInfo);
+    const productName = monthlyData.product as string;
+    const grahpIndex= getGraphIndex(productGraphs,productName);
+    if(grahpIndex!=-1){
+      productGraphs[grahpIndex].series.push(graphCoordinate);
+    } else{
+      const newGraphComponet = createGraphComponent(productName);
+      newGraphComponet.series.push(graphCoordinate);
+      productGraphs.push(newGraphComponet);
     }
   })
   return productGraphs;
 }
 
 
-export function createTwoLinesGraph(dataByMonthes:Array<IMonthData>):Array<IProductGraph>{
-  let produc
-    return []
+export function createTwoLinesGraph(dataByMonthes:Array<IMonthData>):Array<IGraph>{
+  const graph:Array<IGraph> = [createGraphComponent('warnings'),createGraphComponent('problems')];
+  dataByMonthes.forEach((monthlyData:IMonthData)=>{
+    const newWarningCoordinate = createNewCoordinate(monthlyData,'warnings');
+    const newProblemsCoordinate = createNewCoordinate(monthlyData,'problems');
+    graph[0].series.push(newWarningCoordinate);
+    graph[1].series.push(newProblemsCoordinate);
+  })
+  return graph
+
 }
+
 
 
 
@@ -48,3 +52,19 @@ function createNewCoordinate(monthlyData:IMonthData,value:problemsOrWarnings):IG
     }
   }
 }
+
+function createGraphComponent(componentName:string):IGraph{
+   return {
+    name:componentName,
+    series:[],
+   }
+}
+
+
+function getGraphIndex(productGraphs:Array<IGraph>,searchedItem:string){
+  return productGraphs.findIndex(graph=>{
+    return graph.name === searchedItem
+  })
+}
+
+

@@ -35,7 +35,7 @@ export class BarChartComponent implements OnInit{
 
   ngOnInit():void{
     this.barChartData = createMultipleLinesGraph(monthlyDatas,'warnings');
-    this.lineChartData= createMultipleLinesGraph(monthlyDatas,'warnings');
+    this.lineChartData= createTwoLinesGraph(monthlyDatas);
     console.log(this.lineChartData)
   }
 
